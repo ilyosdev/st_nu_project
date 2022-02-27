@@ -69,7 +69,7 @@ export default {
   components: { TheNewsAndArticles, TheVideo, TheTests },
   async asyncData({ $axios }) {
     const News = await $axios
-      .$get(`${process.env.baseUrl}/api/news-articles?populate=image`)
+      .$get(process.env.baseUrl + '/api/news-articles?populate=image')
       .then((res) => res.data)
 
     return { News }
