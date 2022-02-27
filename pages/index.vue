@@ -67,6 +67,7 @@ import TheTests from '~/components/TheTests.vue'
 import TheVideo from '~/components/TheVideo.vue'
 export default {
   components: { TheNewsAndArticles, TheVideo, TheTests },
+  layout: 'default',
   async asyncData({ $axios }) {
     const News = await $axios
       .$get(process.env.baseUrl + '/api/news-articles?populate=image')
@@ -74,6 +75,5 @@ export default {
 
     return { News }
   },
-  layout: 'default',
 }
 </script>
