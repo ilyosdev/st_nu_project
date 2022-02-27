@@ -74,5 +74,6 @@ export default {
 
     return { News }
   },
+  layout: 'default',
 }
 </script>

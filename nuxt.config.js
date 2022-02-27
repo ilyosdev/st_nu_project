@@ -1,5 +1,9 @@
+const isDev = process.env.NODE_ENV !== 'production'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  ...(!isDev && {
+    modern: 'client',
+  }),
   head: {
     title:
       'IELTS – Achieve your work, study and migration goals | IDP IELTS Uzbekistan',
@@ -97,8 +101,41 @@ export default {
     },
   },
 
+  render: {
+    resourceHints: false,
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    filenames: {
+      app: ({ isDev }) => (isDev ? '[name].js' : 'js/[contenthash].js'),
+      chunk: ({ isDev }) => (isDev ? '[name].js' : 'js/[contenthash].js'),
+      css: ({ isDev }) => (isDev ? '[name].css' : 'css/[contenthash].css'),
+      img: ({ isDev }) =>
+        isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]',
+      font: ({ isDev }) =>
+        isDev ? '[path][name].[ext]' : 'fonts/[contenthash:7].[ext]',
+    },
+    ...(!isDev && {
+      html: {
+        minify: {
+          collapseBooleanAttributes: true,
+          decodeEntities: true,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          trimCustomFragments: true,
+          useShortDoctype: true,
+        },
+      },
+    }),
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true,
+    },
+  },
 
   env: {
     baseUrl: process.env.BASE_URL,
