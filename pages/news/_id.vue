@@ -27,7 +27,6 @@ import { marked } from 'marked'
 export default {
   async asyncData({ params, $axios }) {
     const News = await $axios
-      // http://localhost:1337/api/news-articles/2?populate=image
       .$get(
         `${process.env.baseUrl}/api/news-articles/${params.id}?populate=image`
       )
